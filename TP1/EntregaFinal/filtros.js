@@ -5,6 +5,8 @@ let btn_sepia=document.getElementById('sepia');
 let context = canvas.getContext('2d');
 context.fillStyle = "#024359"; // canvas background color
 context.fillRect(0, 0, canvas.width, canvas.height);
+var imageData;
+
 // when click OK in the File Dialog
 // when click OK in the File Dialog
 
@@ -28,23 +30,24 @@ input.onchange = e => {
 
         image.src = content;
 //se dispara cuando la imagen termina de cargar
-       image.onload = function () {
-            let imageAspectRatio = (1.0 * this.height) / this.width;
-            let imageScaledWidth = canvas.width;
-            let imageScaledHeight = canvas.width * imageAspectRatio;
+image.onload = function () {
+    let imageAspectRatio = (1.0 * this.height) / this.width;
+    let imageScaledWidth = canvas.width;
+    let imageScaledHeight = canvas.width * imageAspectRatio;
 
-            // draw image on canvas
-            context.drawImage(this, 0, 0, imageScaledWidth, imageScaledHeight);
+    // draw image on canvas
+    context.drawImage(this, 0, 0, imageScaledWidth, imageScaledHeight);
 
-            // get imageData from content of canvas
-            let imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
-             
+    // get imageData from content of canvas
+     imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
 
-        }
 
-    }
 }
     }
+}
+
+
+
 
 
 
@@ -66,10 +69,8 @@ input.onchange = e => {
            }
 
 
-           
-
             //funcion blnaco y negro
-            function blancoynegro (imageData){
+            function blancoynegro (){
                 for (x=0; x < imageData.width; x++){
                      for (y=0; y< imageData.height; y++){
                                         var red = getRed(imageData, x, y);
@@ -83,8 +84,16 @@ input.onchange = e => {
 
           }
 
-//FUNCION NEGATIVO
-          function negativo(imageData){
+        botonByN();
+          function botonByN(){
+               let btn = document.getElementById("byn");
+              btn.addEventListener("click", function(){
+                blancoynegro();
+              });
+            }
+
+//funcion negativo
+          function negativo(){
                 for (x=0; x < imageData.width; x++){
                        for (y=0; y< imageData.height; y++){
                                    var red = 255 - getRed(imageData, x, y);
@@ -96,8 +105,17 @@ input.onchange = e => {
                   context.putImageData(imageData,0,0);
 
           }
+          botonNegativo();
+function botonNegativo(){
+     let btn = document.getElementById("negativo");
+    btn.addEventListener("click", function(){
+      negativo();
+    });
+  }
 //funcion sepia 
-          function sepia(imageData){
+
+
+          function sepia(){
                 for (x=0; x < imageData.width; x++){
                        for (y=0; y< imageData.height; y++){
                               var red = getRed(imageData, x, y);
@@ -109,7 +127,13 @@ input.onchange = e => {
                   }
                   context.putImageData(imageData,0,0);
           }
-
+          botonSepia();
+          function botonSepia(){
+            let btn = document.getElementById("sepia");
+           btn.addEventListener("click", function(){
+               sepia();
+           });
+         }
 
 
           function setPixel(imageData,x,y,r,g,b,a){
