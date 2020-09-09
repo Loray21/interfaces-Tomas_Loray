@@ -28,7 +28,7 @@ input.onchange = e => {
 
         image.src = content;
 //se dispara cuando la imagen termina de cargar
-      /*  image.onload = function () {
+       image.onload = function () {
             let imageAspectRatio = (1.0 * this.height) / this.width;
             let imageScaledWidth = canvas.width;
             let imageScaledHeight = canvas.width * imageAspectRatio;
@@ -43,7 +43,8 @@ input.onchange = e => {
         }
 
     }
-}*/
+}
+    }
 
 
 
