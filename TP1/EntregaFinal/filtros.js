@@ -92,7 +92,7 @@ image.onload = function () {
               });
             }
 
-//funcion negativo
+        //funcion negativo
           function negativo(){
                 for (x=0; x < imageData.width; x++){
                        for (y=0; y< imageData.height; y++){
@@ -105,16 +105,16 @@ image.onload = function () {
                   context.putImageData(imageData,0,0);
 
           }
+            //evento clik negativo
           botonNegativo();
-function botonNegativo(){
-     let btn = document.getElementById("negativo");
-    btn.addEventListener("click", function(){
-      negativo();
-    });
-  }
-//funcion sepia 
-
-
+        function botonNegativo(){
+            let btn = document.getElementById("negativo");
+                btn.addEventListener("click", function(){
+                     negativo();
+            });
+        }
+        
+        //funcion sepia 
           function sepia(){
                 for (x=0; x < imageData.width; x++){
                        for (y=0; y< imageData.height; y++){
@@ -127,22 +127,50 @@ function botonNegativo(){
                   }
                   context.putImageData(imageData,0,0);
           }
+
           botonSepia();
           function botonSepia(){
-            let btn = document.getElementById("sepia");
-           btn.addEventListener("click", function(){
-               sepia();
+              let btn = document.getElementById("sepia");
+                  btn.addEventListener("click", function(){
+                       sepia();
+              });
+          }
+         
+
+          function brillo(valor_brillo){
+            for ( x = 0; x < canvas.width; x++) {
+             for ( y = 0; y < canvas.height; y++) {
+              index = (x + y * imageData.width) * 4;
+              imageData.data[index+0]=valor_brillo*getRed(imageData, x, y);
+              imageData.data[index+1]=valor_brillo*getGreen(imageData, x, y);
+              imageData.data[index+2]=valor_brillo*getBlue(imageData, x, y);
+              imageData.data[index+3]=255;
+              
+            }
+        }
+        context.putImageData(imageData, 0,0);
+
+    }
+        
+         //evento clik sepia
+          botonBrillo();
+          function botonBrillo(){
+              let valor_brillo= document.getElementById("valor_brillo").value;
+              console.log("valor_brillo")
+                 let btn = document.getElementById("brillo");
+                    btn.addEventListener("click", function(){
+                     brillo(valor_brillo);
            });
          }
 
 
           function setPixel(imageData,x,y,r,g,b,a){
-            //formulita que tranforma el arreglo donde estan almacenados los pixeles en matriz
-    let index=(x+y*imageData.width)*4;
-   imageData.data[index + 0]=r;
-   imageData.data[index + 1]=g;
-    imageData.data[index + 2]=b;
-    imageData.data[index + 3]=a;
+        //formulita que tranforma el arreglo donde estan almacenados los pixeles en matriz
+        let index=(x+y*imageData.width)*4;
+            imageData.data[index + 0]=r;
+            imageData.data[index + 1]=g;
+            imageData.data[index + 2]=b;
+            imageData.data[index + 3]=a;
  
  }
  

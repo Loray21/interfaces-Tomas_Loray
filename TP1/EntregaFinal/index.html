@@ -4,18 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get image data example using File Dialog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>tp1</title>
 </head>
 
 <body>
-    <button onclick="document.querySelector('.input1').click();">Select File ...</button>
-    <input class="input1" type="file" style="display: none;">
-    <canvas class="canvas1" width="600" height="800"></canvas>
-    <button   id="sepia">sepia</button>
-    <button id="negativo">negativo</button>
-    <button id="byn">blanco y negro</button>
-
+    <div class="row" >
+        <div class="col-12 col-md-12 col-lg-1 offset-1">
+            <button type="button" id="sepia" class="btn btn-dark">sepia</button>
+        </div>
+        <div class="col-12 col-md-12 col-lg-1 offset-1">
+            <button type="button" id="negativo" class="btn btn-dark">negativo</button>
+        </div>
+        <div class="col-12 col-md-12 col-lg-1 offset-1">
+            <button type="button"id="byn" class="btn btn-dark">blanco y negro</button>
+        </div>
+        <div class="col-12 col-md-12 col-lg-1 offset-1">
+            <button type="button" id="brillo" class="btn btn-dark">brillo</button>
+     </div>
+    </div>
+<div>
+  <button onclick="document.querySelector('.input1').click();">Select File ...</button>
+  <input class="input1" type="file" style="display: none;">
+  <canvas class="canvas1" width="600" height="800"></canvas>
+  <div class="row" >
+    <div class="col-12 col-md-12 col-lg-1 offset-1">
+          <span class="font-weight-bold indigo-text mr-2 mt-1">0</span>
+               <form class="range-field w-25">
+                  <input class="border-0" id="valor_brillo" type="range" min="0" max="100" />
+              </form>
+          <span class="font-weight-bold indigo-text ml-2 mt-1">100</span>
+      </div>
+  </div>
     <script src="filtros.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 </body>
