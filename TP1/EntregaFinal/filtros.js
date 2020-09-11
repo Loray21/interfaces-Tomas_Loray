@@ -1,11 +1,68 @@
 let canvas = document.querySelector('canvas');
 let input = document.querySelector('input');
 let btn_sepia=document.getElementById('sepia');
+
 // clear canvas
 let context = canvas.getContext('2d');
 context.fillStyle = "#024359"; // canvas background color
 context.fillRect(0, 0, canvas.width, canvas.height);
 var imageData;
+
+
+
+// paint 
+//obtengo donde esta el canvas con respecto a la pantalla
+let rect = canvas.getBoundingClientRect();
+let x=0,y=0,dibujando=false,color='black',grosor=1;
+function defcolor(c){
+  color=c;
+}
+function defgrosor(g){
+  grosor=g;
+}
+//mousedown es cuando da click la primera vez en el canvas
+canvas.addEventListener('mousedown',function(e){
+  //posicion de x y le resto la posicion del canvas donde esta en la pantalla,left=x
+  x=e.clientX-rect.left
+  y=e.clientY-rect.top;
+  dibujando=true;
+});
+//cuando el mouse se mueve
+canvas.addEventListener('mousemove',function(e){
+   if(dibujando===true){
+     dibujar(x,y,e.clientX-rect.left,e.clientY-rect.top);
+     x=e.clientX-rect.left;
+     y=e.clientY-rect.top;
+   }
+
+});
+
+//cuando quita el click del moouse
+canvas.addEventListener('mouseup',function(e){
+  if(dibujando===true){
+    dibujar(x,y,e.clientX-rect.left,e.clientY-rect.top);
+     x=0;
+     y=0;
+     dibujando=false;
+  }
+})
+
+function dibujar(x1,y1,x2,y2){
+  context.beginPath();
+  //atributos de la linea
+  context.strokeStyle=color;
+  context.lineWidth=grosor;
+  //punto inical
+  context.moveTo(x1,y1);
+  //punto final
+  context.lineTo(x2,y2);
+
+  context.stroke();
+  //cierro la ruta
+  context.closePath();
+}
+
+
 
 // when click OK in the File Dialog
 // when click OK in the File Dialog
@@ -137,6 +194,9 @@ image.onload = function () {
           }
          
 
+
+
+
           function brillo(valor_brillo){
             for ( x = 0; x < canvas.width; x++) {
              for ( y = 0; y < canvas.height; y++) {
@@ -155,14 +215,13 @@ image.onload = function () {
          //evento clik sepia
           botonBrillo();
           function botonBrillo(){
-              let valor_brillo= document.getElementById("valor_brillo").value;
-              console.log("valor_brillo")
-                 let btn = document.getElementById("brillo");
-                    btn.addEventListener("click", function(){
-                     brillo(valor_brillo);
-           });
-         }
-
+            let btn = document.getElementById("brillo");
+            btn.addEventListener("click", function(){
+             brillo_inicial=2;
+             console.log(brillo_inicial);
+             brillo(brillo_inicial);    
+            });
+          }
 
           function setPixel(imageData,x,y,r,g,b,a){
         //formulita que tranforma el arreglo donde estan almacenados los pixeles en matriz
